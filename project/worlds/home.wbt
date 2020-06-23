@@ -1,0 +1,646 @@
+#VRML_SIM R2020a utf8
+WorldInfo {
+  info [
+    "Tiago's home"
+  ]
+  title "Tiago's new home"
+  basicTimeStep 16
+}
+Viewpoint {
+  orientation -0.4443750788099292 -0.7716220435877015 -0.45511560199822676 1.8502300823436406
+  position -8.447434336306745 26.485300615776115 7.286608356808894
+  exposure 0.5
+  ambientOcclusionRadius 1
+}
+TexturedBackground {
+  texture "empty_office"
+  skybox FALSE
+  skyColor [
+    0.2 0.2 0.2
+  ]
+}
+DEF FLOOR Solid {
+  translation 6.5 0 4.96
+  rotation 0 -1 0 3.068336886461678e-07
+  children [
+    DEF LIVING_ROOM_1 Transform {
+      translation -3.2 0 1.91
+      children [
+        Shape {
+          appearance CarpetFibers {
+            colorOverride 0.38 0.59 0.67
+          }
+          geometry Plane {
+            size 6.3 6.26
+          }
+        }
+      ]
+    }
+    DEF LIVING_ROOM_2 Transform {
+      translation -4.84 0 6.24
+      children [
+        Shape {
+          appearance CarpetFibers {
+            colorOverride 0.8 0.77 0.76
+          }
+          geometry Plane {
+            size 3.2 2.4
+          }
+        }
+      ]
+    }
+    DEF GARDEN Transform {
+      translation 1.87 0 6.29
+      children [
+        Shape {
+          appearance SlatePavement {
+            textureTransform TextureTransform {
+              scale 9.8 2.6
+            }
+          }
+          geometry Plane {
+            size 9.8 2.6
+          }
+        }
+      ]
+    }
+    DEF KITCHEN Transform {
+      translation -3.2 0 -3.02
+      children [
+        Shape {
+          appearance CarpetFibers {
+            colorOverride 0.82 0.91 0.76
+          }
+          geometry Plane {
+            size 6.3 3.6
+          }
+        }
+      ]
+    }
+    DEF CORRIDOR Transform {
+      translation 1.014 0 -0.15
+      children [
+        Shape {
+          appearance CarpetFibers {
+            colorOverride 0.64 0.73 0.71
+          }
+          geometry Plane {
+            size 2.135 9.933
+          }
+        }
+      ]
+    }
+    DEF BATHROOM_1 Transform {
+      translation 4.391 0 -0.48
+      rotation 0 1 0 -1.5707963071795863
+      children [
+        Shape {
+          appearance CarpetFibers {
+            colorOverride 0.8 0.77 0.76
+          }
+          geometry Plane {
+            size 2 4.6185
+          }
+        }
+      ]
+    }
+    DEF ROOM_1 Transform {
+      translation 4.391 0 2.74
+      children [
+        Shape {
+          appearance CarpetFibers {
+            colorOverride 0.55 0.73 0.65
+          }
+          geometry Plane {
+            size 4.6185 4.3
+          }
+        }
+      ]
+    }
+    DEF ROOM_2 Transform {
+      translation 4.391 0 -3.3
+      children [
+        Shape {
+          appearance CarpetFibers {
+            colorOverride 0.84 0.88 0.64
+          }
+          geometry Plane {
+            size 4.6185 3.6
+          }
+        }
+      ]
+    }
+  ]
+  name "floor"
+  model "floor"
+  boundingObject Plane {
+    size 13 10
+  }
+}
+MyDoor {
+  translation 7.49 0 0
+  rotation 0 1 0 3.141592653589793
+  name "D0"
+  size 1 2.4 0.3
+  jointAtLeft FALSE
+  frameSize 0.05 0.05 0.001
+  doorAppearance GenericDoorAppearance {
+    colorOverride 1 0 0
+  }
+  frameAppearance MattePaint {
+    baseColor 0.53 0.53 0.53
+  }
+  doorHandle DoorLever {
+    jointAtLeft FALSE
+    appearance BrushedAluminium {
+      colorOverride 0 0 0
+    }
+  }
+}
+Robot {
+  children [
+    Receiver {
+      name "wifi_receiver"
+      channel 2
+    }
+    Emitter {
+      name "wifi_emitter"
+      channel 1
+    }
+  ]
+  name "DOS"
+  controller "<extern>"
+  supervisor TRUE
+}
+MyDesk {
+  translation 2.9 0 11.2
+  rotation 0 1 0 1.5707996938995747
+  name "desk(1)"
+  color 0 0 0
+}
+MyTable {
+  translation 5.63688 -6.03961e-14 1.85046
+  rotation 0 1 0 -1.5708003061004252
+  name "table(1)"
+  size 1.5 0.74 1
+}
+MyCabinet {
+  translation 2.33151 4.17445e-14 3.71989
+  rotation 0 1 0 3.141592653589793
+  name "cabinet(10)"
+}
+MyFridge {
+  translation 0.520444 4.26326e-14 1.8635
+}
+MyWashingMachine {
+  translation 12.5281 0.5 4.59586
+  rotation 0.5773509358554485 0.5773509358554485 0.5773489358556708 -2.094395307179586
+  name "washing machine"
+}
+MyCabinet {
+  translation 12.96 9.59233e-14 9.1535
+  rotation 0 1 0 4.712389693899574
+  name "cabinet2"
+}
+MyCabinet {
+  translation 2 0 4
+  name "cabinet(2)"
+}
+MyTable {
+  translation 0.7 0 6.3
+  rotation 0 1 0 1.5707996938995747
+  size 2 0.74 1
+}
+MyCabinet {
+  translation 0.15 0 11.2
+  rotation 0 1 0 1.5707996938995747
+}
+MyDesk {
+  translation 12.6141 -3.73034e-14 6.34833
+  rotation 0 1 0 1.5707996938995747
+  color 0 0 0
+}
+MySofa {
+  translation 4 0 9.25
+  rotation 0 1 0 1.5708003061004252
+  textureUrl [
+    ""
+  ]
+}
+MyBed {
+  translation 9.65204 0 8.8
+  rotation 0 1 0 -3.141592653589793
+  name "bed(1)"
+}
+Wall {
+  translation 6.3 0 7.65
+  rotation 0 1 0 -1.5707933071795868
+  name "wall 7(2)"
+  size 4.5 2.4 0.3
+}
+Wall {
+  translation 8.43 0 0.9
+  rotation 0 1 0 1.5708
+  name "wall 7(1)"
+  size 1.8 2.4 0.3
+}
+Wall {
+  translation 2.87 0 9.9
+  name "wall 3(5)"
+  size 1.25 2.4 0.3
+}
+Wall {
+  translation 0.61 0 9.9
+  name "wall 3(6)"
+  size 1.3 2.4 0.3
+}
+TiagoIron {
+  translation 4 0.095 8.3
+  rotation -0.5773509358554485 -0.5773509358554485 -0.5773489358556708 2.09441
+  name "Tiago"
+  controller "<extern>"
+  lidarSlot [
+    Emitter {
+      name "wifi_emitter"
+      channel 2
+    }
+    Receiver {
+      name "wifi_receiver"
+      channel 1
+    }
+    Receiver {
+      name "bluetooth"
+    }
+  ]
+}
+MyCabinet {
+  translation 6.15 0 7
+  rotation 0 1 0 -1.5707996938995747
+  name "cabinet(4)"
+}
+Wall {
+  translation 0.65 0 0
+  name "wall 1"
+  size 1 2.4 0.3
+}
+Window {
+  translation 1.65 0 0
+  name "window 1"
+  size 1 2.4 0.3
+  frameAppearance BrushedAluminium {
+  }
+}
+Window {
+  translation 13.12 0 4.4
+  rotation 0 1 0 1.570797
+  name "window 1(7)"
+  size 0.7 2.4 0.3
+  bottomWallHeight 1.4
+  windowHeight 0.8
+  frameAppearance BrushedAluminium {
+  }
+}
+Window {
+  translation 13.12 0 7.95
+  rotation 0 1 0 -1.5707963071795863
+  name "window 1(1)"
+  size 1 2.4 0.3
+  frameAppearance BrushedAluminium {
+  }
+}
+Window {
+  translation 10.87 0 0
+  name "window 1(4)"
+  size 1 2.4 0.3
+  frameAppearance BrushedAluminium {
+  }
+}
+Window {
+  translation 0 0 8.25
+  rotation 0 1 0 1.570797
+  name "window 1(5)"
+  size 1 2.4 0.3
+  frameAppearance BrushedAluminium {
+  }
+}
+Wall {
+  translation 4.57 0 0
+  name "wall 2"
+  size 4.85 2.4 0.3
+}
+Wall {
+  translation 12.32 0 0
+  name "wall 2(1)"
+  size 1.9 2.4 0.3
+}
+Wall {
+  translation 9.18 0 0
+  name "wall 2(2)"
+  size 2.4 2.4 0.3
+}
+Wall {
+  translation 3.48 0 11.1
+  name "wall 3(3)"
+  size 0.3 2.4 2.7
+}
+Wall {
+  translation 10.59 0 9.9
+  name "wall 3(1)"
+  size 5.2 2.4 0.3
+}
+Wall {
+  translation 5.01 0 9.9
+  name "wall 3(4)"
+  size 4 2.4 0.3
+}
+Wall {
+  translation 0 0 3.8
+  rotation 0 1 0 1.5708
+  name "wall 5"
+  size 7.9 2.4 0.3
+}
+Wall {
+  translation 0 0 10.65
+  rotation 0 1 0 1.5708
+  name "wall 6"
+  size 3.8 2.4 0.3
+}
+Wall {
+  translation 1.88 0 12.399999999999999
+  name "wall 3(2)"
+  size 3.5 2.4 0.3
+}
+Wall {
+  translation 10.679991 0 3.369987
+  rotation 0 1 0 -3.1415893071795864
+  name "wall 7(6)"
+  size 4.6 2.4 0.3
+}
+Wall {
+  translation 10.73 0 5.58999
+  rotation 0 1 0 -3.1415893071795864
+  name "wall 7(9)"
+  size 4.9 2.4 0.3
+}
+Wall {
+  translation 13.12 0 9.25
+  rotation 0 1 0 1.5708
+  name "wall 7(7)"
+  size 1.6 2.4 0.3
+}
+Wall {
+  translation 13.12 0 6.1
+  rotation 0 1 0 1.5708
+  name "wall 7(12)"
+  size 2.7 2.4 0.3
+}
+Wall {
+  translation 13.12 0 2.1
+  rotation 0 1 0 1.5708
+  name "wall 7(13)"
+  size 3.9 2.4 0.3
+}
+Wall {
+  translation 8.43 0 8.3
+  rotation 0 1 0 -1.5707933071795868
+  name "wall 7(3)"
+  size 3.2 2.4 0.3
+}
+Wall {
+  translation 6.3 0 2.19
+  rotation 0 1 0 1.5708
+  name "wall 7(8)"
+  size 4.5 2.4 0.3
+}
+Wall {
+  translation 8.43 0 3.62
+  rotation 0 1 0 1.5708
+  name "wall 7(5)"
+  size 1.65 2.4 0.3
+}
+Wall {
+  translation 1.95 0 3.88
+  name "wall 9"
+  size 4 2.4 0.3
+}
+Wall {
+  translation 5.7 0 3.88
+  name "wall 9(1)"
+  size 1.5 2.4 0.3
+}
+Robot {
+  children [
+    Emitter {
+      name "B0"
+    }
+    Emitter {
+      translation 0 0 4
+      name "B1"
+    }
+    Emitter {
+      translation 0 0 10
+      name "B2"
+    }
+    Emitter {
+      translation 3.5 0 12.5
+      name "B4"
+    }
+    Emitter {
+      translation 6 0 0
+      name "B5"
+    }
+    Emitter {
+      translation 6 0 4
+      name "B6"
+    }
+    Emitter {
+      translation 6 0 10
+      name "B7"
+    }
+    Emitter {
+      translation 8.5 0 0
+      name "B8"
+    }
+    Emitter {
+      translation 8.5 0 3
+      name "B9"
+    }
+    Emitter {
+      translation 8.5 0 5.5
+      name "B10"
+    }
+    Emitter {
+      translation 8.5 0 10
+      name "B11"
+    }
+    Emitter {
+      translation 13 0 0
+      name "B12"
+    }
+    Emitter {
+      translation 13 0 3
+      name "B13"
+    }
+    Emitter {
+      translation 13 0 5.5
+      name "B14"
+    }
+    Emitter {
+      translation 13 0 10
+      name "B15"
+    }
+    Emitter {
+      translation 0 0 12.5
+      name "B3"
+    }
+  ]
+  name "IPS"
+  controller "<extern>"
+}
+MyBed {
+  translation 11.9008 0 1.65849
+}
+MyCabinet {
+  translation 10.2314 -2.66453e-15 3.53223
+  name "cabinet1"
+}
+MyTrashBin {
+  translation 10.8976 7.4607e-14 10.5189
+}
+MyDoor {
+  translation 7.49 0 9.9
+  name "D1"
+  size 1 2.4 0.3
+  frameSize 0.05 0.05 0.001
+  doorAppearance GenericDoorAppearance {
+    colorOverride 1 0 0
+  }
+  frameAppearance MattePaint {
+    baseColor 0.53 0.53 0.53
+  }
+  doorHandle DoorLever {
+    appearance BrushedAluminium {
+      colorOverride 0 0 0
+    }
+  }
+}
+MyDoor {
+  translation 8.43 0 2.3
+  rotation 0 1 0 1.5707996938995747
+  name "D2"
+  size 1 2.4 0.3
+  jointAtLeft FALSE
+  frameSize 0.05 0.05 0.001
+  doorAppearance GenericDoorAppearance {
+    colorOverride 0.96 0.71 0.32
+  }
+  frameAppearance MattePaint {
+    baseColor 0.53 0.53 0.53
+  }
+  doorHandle DoorLever {
+    jointAtLeft FALSE
+    appearance BrushedAluminium {
+      colorOverride 0 0 0
+    }
+  }
+}
+MyDoor {
+  translation 8.43 0 4.94
+  rotation 0 1 0 1.5707996938995747
+  name "D3"
+  size 1 2.4 0.3
+  jointAtLeft FALSE
+  frameSize 0.05 0.05 0.001
+  doorAppearance GenericDoorAppearance {
+    colorOverride 0.96 0.71 0.32
+  }
+  frameAppearance MattePaint {
+    baseColor 0.53 0.53 0.53
+  }
+  doorHandle DoorLever {
+    jointAtLeft FALSE
+    appearance BrushedAluminium {
+      colorOverride 0 0 0
+    }
+  }
+}
+MyDoor {
+  translation 8.43 0 6.24
+  rotation 0 1 0 1.5708003061004252
+  name "D4"
+  size 1 2.4 0.3
+  frameSize 0.05 0.05 0.001
+  doorAppearance GenericDoorAppearance {
+    colorOverride 0.96 0.71 0.32
+  }
+  frameAppearance MattePaint {
+    baseColor 0.53 0.53 0.53
+  }
+  doorHandle DoorLever {
+    appearance BrushedAluminium {
+      colorOverride 0 0 0
+    }
+  }
+}
+MyDoor {
+  translation 6.3 0 4.94
+  rotation 0 1 0 -1.5707996938995747
+  name "D5"
+  size 1 2.4 0.3
+  jointAtLeft FALSE
+  frameSize 0.05 0.05 0.001
+  doorAppearance GenericDoorAppearance {
+    colorOverride 0.96 0.72 0.32
+  }
+  frameAppearance MattePaint {
+    baseColor 0.53 0.53 0.53
+  }
+  doorHandle DoorLever {
+    jointAtLeft FALSE
+    appearance BrushedAluminium {
+      colorOverride 0 0 0
+    }
+  }
+}
+MyDoor {
+  translation 4.45 0 3.88
+  rotation 0 1 0 3.141592653589793
+  name "D6"
+  size 1 2.4 0.3
+  frameSize 0.05 0.05 0.001
+  doorAppearance GenericDoorAppearance {
+    colorOverride 0.96 0.71 0.32
+  }
+  frameAppearance MattePaint {
+    baseColor 0.53 0.53 0.53
+  }
+  doorHandle DoorLever {
+    appearance BrushedAluminium {
+      colorOverride 0 0 0
+    }
+  }
+}
+MyDoor {
+  translation 1.75 0 9.9
+  rotation 0 1 0 3.141592653589793
+  name "D7"
+  size 1 2.4 0.3
+  jointAtLeft FALSE
+  frameSize 0.05 0.05 0.001
+  doorAppearance GenericDoorAppearance {
+    colorOverride 0.96 0.71 0.32
+  }
+  frameAppearance MattePaint {
+    baseColor 0.53 0.53 0.53
+  }
+  doorHandle DoorLever {
+    jointAtLeft FALSE
+    appearance BrushedAluminium {
+      colorOverride 0 0 0
+    }
+  }
+}
+MyCabinet {
+  translation 9.43 0 0.18
+  name "cabinet0"
+}

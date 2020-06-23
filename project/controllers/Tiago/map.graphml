@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns">
+	<key id="room" for="all" attr.name="room_id" attr.type="string"/>
+	<key id="pos_x" for="node" attr.name="x" attr.type="double"/>
+	<key id="pos_z" for="node" attr.name="z" attr.type="double"/>
+	<key id="node_type" for="node" attr.name="type" attr.type="string"/>
+	<key id="landmark_object" for="node" attr.name="rec_name" attr.type="string"/>
+	<key id="landmark_orientation_x" for="node" attr.name="orientation_x" attr.type="float"/>
+	<key id="landmark_orientation_z" for="node" attr.name="orientation_z" attr.type="float"/>
+	<key id="edge_distance" for="edge" attr.name="distance" attr.type="double"/>
+	<graph id="home_graph" edgedefault="undirected">
+		<node id="D0">
+			<data key="pos_x">7.5</data>
+			<data key="pos_z">0.5</data>
+			<data key="node_type">door</data>
+			<data key="room">hallway</data>
+		</node>
+		<node id="D1">
+			<data key="pos_x">7.5</data>
+			<data key="pos_z">9.9</data>
+			<data key="node_type">door</data>
+			<data key="room">hallway</data>
+		</node>
+		<node id="D2">
+			<data key="pos_x">8.4</data>
+			<data key="pos_z">2.3</data>
+			<data key="node_type">door</data>
+			<data key="room">bedroom0</data>
+		</node>
+		<node id="D3">
+			<data key="pos_x">8.4</data>
+			<data key="pos_z">4.9</data>
+			<data key="node_type">door</data>
+			<data key="room">bathroom</data>
+		</node>
+		<node id="D4">
+			<data key="pos_x">8.4</data>
+			<data key="pos_z">6.2</data>
+			<data key="node_type">door</data>
+			<data key="room">bedroom1</data>
+		</node>
+		<node id="D5">
+			<data key="pos_x">6.3</data>
+			<data key="pos_z">4.9</data>
+			<data key="node_type">door</data>
+			<data key="room">living</data>
+		</node>
+		<node id="D6">
+			<data key="pos_x">4.5</data>
+			<data key="pos_z">3.9</data>
+			<data key="node_type">door</data>
+			<data key="room">kitchen</data>
+		</node>
+		<node id="D7">
+			<data key="pos_x">1.8</data>
+			<data key="pos_z">9.9</data>
+			<data key="node_type">door</data>
+			<data key="room">office</data>
+		</node>
+		<node id="P0">
+			<data key="pos_x">7.5</data>
+			<data key="pos_z">2.3</data>
+			<data key="node_type">pose</data>
+			<data key="room">hallway</data>
+		</node>
+		<node id="P1">
+			<data key="pos_x">7.5</data>
+			<data key="pos_z">4.9</data>
+			<data key="node_type">pose</data>
+			<data key="room">hallway</data>
+		</node>
+		<node id="P2">
+			<data key="pos_x">7.5</data>
+			<data key="pos_z">6.2</data>
+			<data key="node_type">pose</data>
+			<data key="room">hallway</data>
+		</node>
+		<node id="P3">
+			<data key="pos_x">4.5</data>
+			<data key="pos_z">2.0</data>
+			<data key="node_type">pose</data>
+			<data key="room">kitchen</data>
+		</node>
+		<node id="P4">
+			<data key="pos_x">4.5</data>
+			<data key="pos_z">4.9</data>
+			<data key="node_type">pose</data>
+			<data key="room">living</data>
+		</node>
+		<node id="P5">
+			<data key="pos_x">4.5</data>
+			<data key="pos_z">6.3</data>
+			<data key="node_type">pose</data>
+			<data key="room">living</data>
+		</node>
+		<node id="P6">
+			<data key="pos_x">4.5</data>
+			<data key="pos_z">8.0</data>
+			<data key="node_type">pose</data>
+			<data key="room">living</data>
+		</node>
+		<node id="P7">
+			<data key="pos_x">1.8</data>
+			<data key="pos_z">8.0</data>
+			<data key="node_type">pose</data>
+			<data key="room">living</data>
+		</node>
+		<node id="P8">
+			<data key="pos_x">1.8</data>
+			<data key="pos_z">11.0</data>
+			<data key="node_type">pose</data>
+			<data key="room">office</data>
+		</node>
+		<node id="P9">
+			<data key="pos_x">10.5</data>
+			<data key="pos_z">2.3</data>
+			<data key="node_type">pose</data>
+			<data key="room">bedroom0</data>
+		</node>
+		<node id="P10">
+			<data key="pos_x">10.5</data>
+			<data key="pos_z">4.8</data>
+			<data key="node_type">pose</data>
+			<data key="room">bathroom</data>
+		</node>
+		<node id="P11">
+			<data key="pos_x">11.3</data>
+			<data key="pos_z">6.4</data>
+			<data key="node_type">pose</data>
+			<data key="room">bedroom1</data>
+		</node>
+		<node id="P12">
+			<data key="pos_x">7.5</data>
+			<data key="pos_z">12.0</data>
+			<data key="node_type">pose</data>
+			<data key="room">outdoor</data>
+		</node>
+		<node id="L0">
+			<data key="pos_x">1.4</data>
+			<data key="pos_z">1.9</data>
+			<data key="node_type">landmark</data>
+			<data key="landmark_object">fridge</data>
+			<data key="landmark_orientation_x">0.5</data>
+			<data key="landmark_orientation_z">1.9</data>
+			<data key="room">kitchen</data>
+		</node>
+		<node id="L1">
+			<data key="pos_x">4.7</data>
+			<data key="pos_z">1.8</data>
+			<data key="node_type">landmark</data>
+			<data key="landmark_object">table</data>
+			<data key="landmark_orientation_x">5.6</data>
+			<data key="landmark_orientation_z">1.9</data>
+			<data key="room">kitchen</data>
+		</node>
+		<node id="L2">
+			<data key="pos_x">2.3</data>
+			<data key="pos_z">2.5</data>
+			<data key="node_type">landmark</data>
+			<data key="landmark_object">cabinet</data>
+			<data key="landmark_orientation_x">2.3</data>
+			<data key="landmark_orientation_z">3.7</data>
+			<data key="room">kitchen</data>
+		</node>
+		<node id="L3">
+			<data key="pos_x">2.0</data>
+			<data key="pos_z">5.0</data>
+			<data key="node_type">landmark</data>
+			<data key="landmark_object">cabinet</data>
+			<data key="landmark_orientation_x">2.0</data>
+			<data key="landmark_orientation_z">4.0</data>
+			<data key="room">living</data>
+		</node>
+		<node id="L4">
+			<data key="pos_x">1.6</data>
+			<data key="pos_z">6.3</data>
+			<data key="node_type">landmark</data>
+			<data key="landmark_object">table</data>
+			<data key="landmark_orientation_x">0.7</data>
+			<data key="landmark_orientation_z">6.3</data>
+			<data key="room">living</data>
+		</node>
+		<node id="L5">
+			<data key="pos_x">5.2</data>
+			<data key="pos_z">7.0</data>
+			<data key="node_type">landmark</data>
+			<data key="landmark_object">cabinet</data>
+			<data key="landmark_orientation_x">6.2</data>
+			<data key="landmark_orientation_z">7.0</data>
+			<data key="room">living</data>
+		</node>
+		<node id="L6">
+			<data key="pos_x">4.0</data>
+			<data key="pos_z">8.3</data>
+			<data key="node_type">landmark</data>
+			<data key="landmark_object">sofa</data>
+			<data key="landmark_orientation_x">4.0</data>
+			<data key="landmark_orientation_z">9.3</data>
+			<data key="room">living</data>
+		</node>
+		<node id="L7">
+			<data key="pos_x">1.1</data>
+			<data key="pos_z">11.3</data>
+			<data key="node_type">landmark</data>
+			<data key="landmark_object">cabinet</data>
+			<data key="landmark_orientation_x">0.2</data>
+			<data key="landmark_orientation_z">11.2</data>
+			<data key="room">office</data>
+		</node>
+		<node id="L8">
+			<data key="pos_x">2.1</data>
+			<data key="pos_z">11.3</data>
+			<data key="node_type">landmark</data>
+			<data key="landmark_object">desk</data>
+			<data key="landmark_orientation_x">2.9</data>
+			<data key="landmark_orientation_z">11.2</data>
+			<data key="room">office</data>
+		</node>
+		<node id="L9">
+			<data key="pos_x">9.5</data>
+			<data key="pos_z">1.1</data>
+			<data key="node_type">landmark</data>
+			<data key="landmark_object">cabinet</data>
+			<data key="landmark_orientation_x">9.4</data>
+			<data key="landmark_orientation_z">0.2</data>
+			<data key="room">bedroom0</data>
+		</node>
+		<node id="L10">
+			<data key="pos_x">10.5</data>
+			<data key="pos_z">1.7</data>
+			<data key="node_type">landmark</data>
+			<data key="landmark_object">bed</data>
+			<data key="landmark_orientation_x">11.9</data>
+			<data key="landmark_orientation_z">1.7</data>
+			<data key="room">bedroom0</data>
+		</node>
+		<node id="L11">
+			<data key="pos_x">10.2</data>
+			<data key="pos_z">4.4</data>
+			<data key="node_type">landmark</data>
+			<data key="landmark_object">cabinet</data>
+			<data key="landmark_orientation_x">10.2</data>
+			<data key="landmark_orientation_z">3.5</data>
+			<data key="room">bathroom</data>
+		</node>
+		<node id="L12">
+			<data key="pos_x">11.8</data>
+			<data key="pos_z">4.6</data>
+			<data key="node_type">landmark</data>
+			<data key="landmark_object">washing_machine</data>
+			<data key="landmark_orientation_x">12.5</data>
+			<data key="landmark_orientation_z">4.6</data>
+			<data key="room">bathroom</data>
+		</node>
+		<node id="L13">
+			<data key="pos_x">11.9</data>
+			<data key="pos_z">6.3</data>
+			<data key="node_type">landmark</data>
+			<data key="landmark_object">desk</data>
+			<data key="landmark_orientation_x">12.6</data>
+			<data key="landmark_orientation_z">6.3</data>
+			<data key="room">bedroom1</data>
+		</node>
+		<node id="L14">
+			<data key="pos_x">11.2</data>
+			<data key="pos_z">9</data>
+			<data key="node_type">landmark</data>
+			<data key="landmark_object">bed</data>
+			<data key="landmark_orientation_x">9.7</data>
+			<data key="landmark_orientation_z">8.8</data>
+			<data key="room">bedroom1</data>
+		</node>
+		<node id="L15">
+			<data key="pos_x">12.0</data>
+			<data key="pos_z">9.2</data>
+			<data key="node_type">landmark</data>
+			<data key="landmark_object">cabinet</data>
+			<data key="landmark_orientation_x">12.9</data>
+			<data key="landmark_orientation_z">9.1</data>
+			<data key="room">bedroom1</data>
+		</node>
+		<node id="L16">
+			<data key="pos_x">11.0</data>
+			<data key="pos_z">11.5</data>
+			<data key="node_type">landmark</data>
+			<data key="landmark_object">trash_bin</data>
+			<data key="landmark_orientation_x">10.9</data>
+			<data key="landmark_orientation_z">10.5</data>
+			<data key="room">outdoor</data>
+		</node>
+		<edge id="E0" source="D0" target="P0">
+			<data key="edge_distance">1.8</data>
+			<data key="room">hallway</data>
+		</edge>
+		<edge id="E1" source="P0" target="D2">
+			<data key="edge_distance">1.1</data>
+			<data key="room">hallway</data>
+		</edge>
+		<edge id="E2" source="P0" target="P1">
+			<data key="edge_distance">2.5</data>
+			<data key="room">hallway</data>
+		</edge>
+		<edge id="E3" source="P1" target="D5">
+			<data key="edge_distance">1.1</data>
+			<data key="room">hallway</data>
+		</edge>
+		<edge id="E4" source="P1" target="D3">
+			<data key="edge_distance">1.1</data>
+			<data key="room">hallway</data>
+		</edge>
+		<edge id="E5" source="P1" target="P2">
+			<data key="edge_distance">1.6</data>
+			<data key="room">hallway</data>
+		</edge>
+		<edge id="E6" source="P2" target="D4">
+			<data key="edge_distance">1.1</data>
+			<data key="room">hallway</data>
+		</edge>
+		<edge id="E7" source="P2" target="D1">
+			<data key="edge_distance">3.6</data>
+			<data key="room">hallway</data>
+		</edge>
+		<edge id="E8" source="D6" target="P3">
+			<data key="edge_distance">1.1</data>
+			<data key="room">kitchen</data>
+		</edge>
+		<edge id="E9" source="P3" target="L2">
+			<data key="edge_distance">1.9</data>
+			<data key="room">kitchen</data>
+		</edge>
+		<edge id="E10" source="P3" target="L0">
+			<data key="edge_distance">3.1</data>
+			<data key="room">kitchen</data>
+		</edge>
+		<edge id="E11" source="P3" target="L1">
+			<data key="edge_distance">1.1</data>
+			<data key="room">kitchen</data>
+		</edge>
+		<edge id="E12" source="L2" target="L0">
+			<data key="edge_distance">1.6</data>
+			<data key="room">kitchen</data>
+		</edge>
+		<edge id="E13" source="L0" target="L1">
+			<data key="edge_distance">3.7</data>
+			<data key="room">kitchen</data>
+		</edge>
+		<edge id="E14" source="D6" target="P4">
+			<data key="edge_distance">0.9</data>
+			<data key="room">living</data>
+		</edge>
+		<edge id="E15" source="P4" target="P5">
+			<data key="edge_distance">2.1</data>
+			<data key="room">living</data>
+		</edge>
+		<edge id="E16" source="P5" target="P6">
+			<data key="edge_distance">1.5</data>
+			<data key="room">living</data>
+		</edge>
+		<edge id="E17" source="P6" target="P7">
+			<data key="edge_distance">1.7</data>
+			<data key="room">living</data>
+		</edge>
+		<edge id="E18" source="P7" target="D7">
+			<data key="edge_distance">2.5</data>
+			<data key="room">living</data>
+		</edge>
+		<edge id="E19" source="D5" target="P4">
+			<data key="edge_distance">2.0</data>
+			<data key="room">living</data>
+		</edge>
+		<edge id="E20" source="P4" target="L3">
+			<data key="edge_distance">2.2</data>
+			<data key="room">living</data>
+		</edge>
+		<edge id="E21" source="P4" target="L4">
+			<data key="edge_distance">3.1</data>
+			<data key="room">living</data>
+		</edge>
+		<edge id="E22" source="P5" target="L3">
+			<data key="edge_distance">2.7</data>
+			<data key="room">living</data>
+		</edge>
+		<edge id="E23" source="P5" target="L4">
+			<data key="edge_distance">2.7</data>
+			<data key="room">living</data>
+		</edge>
+		<edge id="E24" source="P5" target="L5">
+			<data key="edge_distance">1.4</data>
+			<data key="room">living</data>
+		</edge>
+		<edge id="E25" source="P6" target="L5">
+			<data key="edge_distance">1.6</data>
+			<data key="room">living</data>
+		</edge>
+		<edge id="E26" source="P6" target="L4">
+			<data key="edge_distance">3.2</data>
+			<data key="room">living</data>
+		</edge>
+		<edge id="E27" source="P6" target="L6">
+			<data key="edge_distance">0.5</data>
+			<data key="room">living</data>
+		</edge>
+		<edge id="E28" source="P7" target="L6">
+			<data key="edge_distance">2.5</data>
+			<data key="room">living</data>
+		</edge>
+		<edge id="E29" source="D7" target="P8">
+			<data key="edge_distance">1.0</data>
+			<data key="room">office</data>
+		</edge>
+		<edge id="E30" source="P8" target="L7">
+			<data key="edge_distance">0.8</data>
+			<data key="room">office</data>
+		</edge>
+		<edge id="E31" source="P8" target="L8">
+			<data key="edge_distance">0.6</data>
+			<data key="room">office</data>
+		</edge>
+		<edge id="E32" source="L7" target="L8">
+			<data key="edge_distance">1.4</data>
+			<data key="room">office</data>
+		</edge>
+		<edge id="E33" source="D2" target="P9">
+			<data key="edge_distance">1.0</data>
+			<data key="room">bedroom0</data>
+		</edge>
+		<edge id="E34" source="P9" target="L9">
+			<data key="edge_distance">1.3</data>
+			<data key="room">bedroom0</data>
+		</edge>
+		<edge id="E35" source="P9" target="L10">
+			<data key="edge_distance">1.2</data>
+			<data key="room">bedroom0</data>
+		</edge>
+		<edge id="E36" source="L9" target="L10">
+			<data key="edge_distance">1.2</data>
+			<data key="room">bedroom0</data>
+		</edge>
+		<edge id="E37" source="D3" target="P10">
+			<data key="edge_distance">1.0</data>
+			<data key="room">bathroom</data>
+		</edge>
+		<edge id="E38" source="P10" target="L11">
+			<data key="edge_distance">0.9</data>
+			<data key="room">bathroom</data>
+		</edge>
+		<edge id="E39" source="P10" target="L12">
+			<data key="edge_distance">2.4</data>
+			<data key="room">bathroom</data>
+		</edge>
+		<edge id="E40" source="L11" target="L12">
+			<data key="edge_distance">1.7</data>
+			<data key="room">bathroom</data>
+		</edge>
+		<edge id="E41" source="D4" target="P11">
+			<data key="edge_distance">2.8</data>
+			<data key="room">bedroom1</data>
+		</edge>
+		<edge id="E42" source="P11" target="L13">
+			<data key="edge_distance">0.7</data>
+			<data key="room">bedroom1</data>
+		</edge>
+		<edge id="E43" source="P11" target="L14">
+			<data key="edge_distance">2.1</data>
+			<data key="room">bedroom1</data>
+		</edge>
+		<edge id="E44" source="P11" target="L15">
+			<data key="edge_distance">2.9</data>
+			<data key="room">bedroom1</data>
+		</edge>
+		<edge id="E45" source="L14" target="L15">
+			<data key="edge_distance">1.3</data>
+			<data key="room">bedroom1</data>
+		</edge>
+		<edge id="E46" source="D1" target="P12">
+			<data key="edge_distance">1.5</data>
+			<data key="room">outdoor</data>
+		</edge>
+		<edge id="E47" source="P12" target="L16">
+			<data key="edge_distance">3.5</data>
+			<data key="room">outdoor</data>
+		</edge>
+	</graph></graphml>
