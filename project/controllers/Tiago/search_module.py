@@ -61,7 +61,7 @@ def search_object(table_path, graph, current_position_id, object_to_search, visi
             visited_place = config_tiago.ID_TO_TAG[visited_place]  # translate
             df = df.drop(visited_place, 1)
             places.remove(visited_place)
-        except e:
+        except:
             print(visited_place + " not found\n")
 	
     # abbiamo visitato tutti i posti, quindi bisogna terminare la simulazione, oggetto non presente in casa!
@@ -106,7 +106,7 @@ def search_object(table_path, graph, current_position_id, object_to_search, visi
     
     tag_and_dist = sorted(zip(places, pvals), key = lambda x: x[1], reverse=True)
     display_probs(dict(tag_and_dist))
-    top_4_places = [x[0] for x in tag_and_dist[:4]]
+    top_4_places = [x[0] for x in tag_and_dist[:5]]
     top_4_places_id = [config_tiago.TAG_TO_ID[tag] for tag in top_4_places]    
     top_5_nodes_id = list(set(top_4_places_id + [current_position_id]))
     
@@ -127,5 +127,7 @@ def search_object(table_path, graph, current_position_id, object_to_search, visi
     #visiting_sequence = [config_tiago.TAG_TO_ID[tag] for tag,_ in visiting_sequence]
     # tieni solo i migliori 5, e scarta tutti gli zeri
     # valutazione: top1, top3, top5
+    visiting_sequence = visiting_sequence[1:]
+    
     return visiting_sequence
 

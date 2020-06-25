@@ -28,12 +28,12 @@ def loop(robot, map_graph):
     # init stuff here (only once)
     start_landmark = "L14"
     current_node_id = start_landmark  # La simulazione inizia sempre con Tiago posizionato su un landmark, prevediamo solo navigazioni da landmark a landmark
-    path_list, object_to_search = human_computer_interaction_module.ask_for_route(map_graph,current_node_id)
+    visited_places = list()
+    path_list, object_to_search = human_computer_interaction_module.ask_for_route(map_graph,current_node_id,visited_places)
     target_list = path_list[0]
     path_index = 0
     target_index = 0
     navigation_mode = "turn"
-    # object_found = False
     
     print("Let's start!")
 
@@ -63,7 +63,8 @@ def loop(robot, map_graph):
                     communication_module.send_request(robot, target_list[target_index-1]['name'], "close")
 
                 # only for landmark
-                if target_list[target_index]['type'] == 'landmark' and (current_node_id != start_landmark):
+                if target_list[target_index]['type'] == 'landmark':
+                    visited_places.append(target_list[target_index]['name'] )
                     navigation_module.look_at_landmark(robot, current_position, target_list[target_index]['viewpoint'])
                     # controlla se l'oggetto da cercare è presente nel landmark
                     object_found = basic_module.look_for_object(target_list[target_index]["name"], object_to_search)
@@ -81,9 +82,16 @@ def loop(robot, map_graph):
                     path_index += 1
 
                     if (path_index  == len(path_list)):
-                        # abbiamo esplorato tutti gli oggetti
-                        print("I think {} is not in this home... Goodbye!")
-                        exit(0)
+                        # abbiamo esplorato tutti i landmark, chiediamone altri
+                        print("I can't fine {}, please give me more places!".format(object_to_search))
+                        path_list, object_to_search = human_computer_interaction_module.ask_for_route(map_graph,current_node_id, visited_places, object_to_search)
+                        
+                        if path_list:
+                            path_index = 0
+                        else:
+                            # abbiamo esplorato tutti i possibili posti
+                            print("I think {} is not in this home... Goodbye!".format(object_to_search))
+                            exit(0)
                         
                     target_list = path_list[path_index]
                     target_index = 0

@@ -16,9 +16,11 @@ def ask_for_object():
     return object_to_search
 
 
-def ask_for_route(graph, current_node_id):
-    object_to_search = ask_for_object()
-    landmarks_to_visit = search_module.search_object("table.csv", graph, current_node_id, object_to_search)
+def ask_for_route(graph, current_node_id, visited_places, object_to_search=""):
+    if not object_to_search:
+        object_to_search = ask_for_object()
+        
+    landmarks_to_visit = search_module.search_object("table.csv", graph, current_node_id, object_to_search, visited_places)
     # debug
     print("These are the landmarks I will visit: {}".format(landmarks_to_visit))
     # bisogna calcolare il path per raggiungere ogni landmark

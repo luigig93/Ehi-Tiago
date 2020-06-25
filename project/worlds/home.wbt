@@ -7,8 +7,8 @@ WorldInfo {
   basicTimeStep 16
 }
 Viewpoint {
-  orientation -0.0038821880204121333 0.8964235883793104 0.44318131595695115 3.1258879599854557
-  position 6.785991544998781 16.722247179021654 -4.377359967870962
+  orientation 0.003235964853659971 0.8172603459013916 0.5762595383580246 3.1507711817116113
+  position 5.125045128933188 21.811827852421523 -2.711659862963801
   exposure 0.5
   ambientOcclusionRadius 1
 }
@@ -17,7 +17,7 @@ TiagoIron {
   rotation -5.085788426080957e-09 0.7071117811673225 0.7071017811704173 3.14158
   name "Tiago"
   controller "Tiago"
-  controllerArgs "search=banana"
+  controllerArgs "search=smartphone"
   lidarSlot [
     Emitter {
       name "wifi_emitter"
