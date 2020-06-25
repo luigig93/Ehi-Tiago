@@ -19,11 +19,6 @@ def display_probs(d):
         print(f'Place: {key:8} Prevalence: {100*value:.2f}%.')
 
 
-def init_search_module():
-    gmodel = gensim.models.KeyedVectors.load_word2vec_format("model.vec")
-    return gmodel
-
-
 def get_distances(graph, source_id):
 
     distances = nx.shortest_path_length(graph, source=source_id, weight="distance" )
@@ -36,27 +31,6 @@ def get_distances(graph, source_id):
             distances_filtered[position] = distances[key]
 
     return distances_filtered
-
-
-def check_similar_objects(df, gmodel, object_to_search):
-
-    max = 0
-    object_most_similar = None
-
-    try:
-        similars = gmodel.most_similar(positive=[object_to_search], topn=10)
-    except KeyError: #object not present in the table
-        return None
-
-    similars = [x for x,_ in similars]
-
-    for similar in similars:
-        # print(similar)
-        if(len(df.loc[df["object"] == similar]) > max):
-            object_most_similar = similar
-            max = sum(df.loc[df["object"] == similar].drop("object",1).values[0])
-
-    return object_most_similar
 
 
 def search_object(table_path, graph, current_position_id, object_to_search):

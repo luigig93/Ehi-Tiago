@@ -51,7 +51,7 @@ def send_request(robot, door, mode):
 def receive_notify(robot):
     wifi_receiver = robot.getReceiver(config_tiago.WIFI_RECEIVER)
 
-    while robot.step(16) != -1:
+    while robot.step(int(robot.getBasicTimeStep())) != -1:
         # ci sarà sempre un solo messaggio alla volta
         if wifi_receiver.getQueueLength() == 1:
             msg = wifi_receiver.getData().decode()

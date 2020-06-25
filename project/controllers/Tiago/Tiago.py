@@ -38,7 +38,7 @@ def loop(robot, map_graph):
     print("Let's start!")
 
     # robot loop
-    while robot.step(16) != -1:
+    while robot.step(int(robot.getBasicTimeStep())) != -1:
         dist_list = communication_module.receive_msgs(robot)
 
         if len(dist_list) > 0:

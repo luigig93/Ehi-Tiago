@@ -11,7 +11,7 @@ def init_basic_system(robot):
 
 def step(robot):
     if robot.step(int(robot.getBasicTimeStep())) == -1:
-        exit(config_tiago.EXIT_SUCCESS)
+        exit(0)
 
 
 def init_motors(robot):

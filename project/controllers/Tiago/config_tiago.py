@@ -26,9 +26,6 @@ WIFI_EMITTER = "wifi_emitter"
 # set navigation error
 NAV_ERROR = 0.2 # for stop condition
 
-# other
-EXIT_SUCCESS = 0
-
 # Beacons placement
 NUM_OF_BEACONS = 16
 # per comodità dare le coordinate nel formato (x, z) così diventa più leggibile su webots
