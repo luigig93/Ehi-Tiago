@@ -67,7 +67,7 @@ TAG_TO_ID = {v: k for k, v in ID_TO_TAG.items()}
 HOME_OBJECTS = {
 
         "L0": [],
-        "L1": ["banana",],
+        "L1": ["apple"],
         "L2": [],
         "L3": [],
         "L4": [],

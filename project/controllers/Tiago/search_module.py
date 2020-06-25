@@ -106,7 +106,16 @@ def search_object(table_path, graph, current_position_id, object_to_search, visi
     
     tag_and_dist = sorted(zip(places, pvals), key = lambda x: x[1], reverse=True)
     display_probs(dict(tag_and_dist))
-    top_4_places = [x[0] for x in tag_and_dist[:5]]
+    
+    top_4_places = list() # [x[0] for x in tag_and_dist[:5]]
+    
+    counter = float(0)
+    for place, prob in tag_and_dist:
+        counter += prob
+        top_4_places.append(place)
+        if counter >= 0.60:
+                break
+    
     top_4_places_id = [config_tiago.TAG_TO_ID[tag] for tag in top_4_places]    
     top_5_nodes_id = list(set(top_4_places_id + [current_position_id]))
     
