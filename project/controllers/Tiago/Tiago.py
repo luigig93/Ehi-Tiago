@@ -26,7 +26,7 @@ def setup():
 
 def loop(robot, map_graph):
     # init stuff here (only once)
-    start_landmark = "L6"
+    start_landmark = "L14"
     current_node_id = start_landmark  # La simulazione inizia sempre con Tiago posizionato su un landmark, prevediamo solo navigazioni da landmark a landmark
     path_list, object_to_search = human_computer_interaction_module.ask_for_route(map_graph,current_node_id)
     target_list = path_list[0]

@@ -7,14 +7,14 @@ WorldInfo {
   basicTimeStep 16
 }
 Viewpoint {
-  orientation -0.0013685447699612785 -0.8755854617885198 -0.48306130686466403 3.1366314802166944
-  position 3.524938266483815 13.956651905369412 -1.155965558950526
+  orientation -0.0038821880204121333 0.8964235883793104 0.44318131595695115 3.1258879599854557
+  position 6.785991544998781 16.722247179021654 -4.377359967870962
   exposure 0.5
   ambientOcclusionRadius 1
 }
 TiagoIron {
-  translation 4 0.095 8.3
-  rotation -0.5773509358554485 -0.5773509358554485 -0.5773489358556708 2.09441
+  translation 11.2 0.095 9
+  rotation -5.085788426080957e-09 0.7071117811673225 0.7071017811704173 3.14158
   name "Tiago"
   controller "Tiago"
   controllerArgs "search=banana"
@@ -116,7 +116,6 @@ Robot {
   controller "DOS"
   supervisor TRUE
 }
-
 TexturedBackground {
   texture "empty_office"
   skybox FALSE
@@ -567,7 +566,6 @@ MyDoor {
     }
   }
 }
-
 MyCabinet {
   translation 12.96 9.59233e-14 9.1535
   rotation 0 1 0 4.712389693899574
@@ -623,7 +621,7 @@ MyTable {
 }
 MyBed {
   translation 9.65204 0 8.8
-  rotation 0 1 0 -3.141592653589793
+  rotation 0 -1 0 3.141592653589793
   name "bed(1)"
 }
 MyBed {
@@ -643,4 +641,8 @@ Sofa {
 }
 MyTrashBin {
   translation 10.8976 7.4607e-14 10.5189
+}
+MyPedestrian {
+  translation 9.34246 0.84 8.8068
+  rotation -0.5773492691885823 0.5773512691895147 0.5773502691890485 2.0944
 }
