@@ -6,10 +6,12 @@ import search_module
 
 def ask_for_object():
     # questa è l'unica forma di interazione prevista in webots
-    object_to_search = sys.argv[1]
+    # l'oggetto verrà inserito nel campo "controllerArgs" del nodo corrispondente a Tiago
+    # nel formato search=banana
+    object_to_search = sys.argv[1].split("=")[1]
     
     # presentazione
-    print("Hi, I'm Tiago, and you asked me to search {}".format(sys.argv[1]))
+    print("Hi, I'm Tiago, and you asked me to search {}".format(object_to_search))
     
     return object_to_search
 

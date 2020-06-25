@@ -12,6 +12,111 @@ Viewpoint {
   exposure 0.5
   ambientOcclusionRadius 1
 }
+TiagoIron {
+  translation 4 0.095 8.3
+  rotation -0.5773509358554485 -0.5773509358554485 -0.5773489358556708 2.09441
+  name "Tiago"
+  controller "Tiago"
+  controllerArgs "search=banana"
+  lidarSlot [
+    Emitter {
+      name "wifi_emitter"
+      channel 2
+    }
+    Receiver {
+      name "wifi_receiver"
+      channel 1
+    }
+    Receiver {
+      name "bluetooth"
+    }
+  ]
+}
+Robot {
+  children [
+    Emitter {
+      name "B0"
+    }
+    Emitter {
+      translation 0 0 4
+      name "B1"
+    }
+    Emitter {
+      translation 0 0 10
+      name "B2"
+    }
+    Emitter {
+      translation 0 0 12.5
+      name "B3"
+    }
+    Emitter {
+      translation 3.5 0 12.5
+      name "B4"
+    }
+    Emitter {
+      translation 6 0 0
+      name "B5"
+    }
+    Emitter {
+      translation 6 0 4
+      name "B6"
+    }
+    Emitter {
+      translation 6 0 10
+      name "B7"
+    }
+    Emitter {
+      translation 8.5 0 0
+      name "B8"
+    }
+    Emitter {
+      translation 8.5 0 3
+      name "B9"
+    }
+    Emitter {
+      translation 8.5 0 5.5
+      name "B10"
+    }
+    Emitter {
+      translation 8.5 0 10
+      name "B11"
+    }
+    Emitter {
+      translation 13 0 0
+      name "B12"
+    }
+    Emitter {
+      translation 13 0 3
+      name "B13"
+    }
+    Emitter {
+      translation 13 0 5.5
+      name "B14"
+    }
+    Emitter {
+      translation 13 0 10
+      name "B15"
+    }
+  ]
+  name "IPS"
+  controller "IPS"
+}
+Robot {
+  children [
+    Receiver {
+      name "wifi_receiver"
+      channel 2
+    }
+    Emitter {
+      name "wifi_emitter"
+      channel 1
+    }
+  ]
+  name "DOS"
+  controller "DOS"
+  supervisor TRUE
+}
+
 TexturedBackground {
   texture "empty_office"
   skybox FALSE
@@ -462,110 +567,7 @@ MyDoor {
     }
   }
 }
-TiagoIron {
-  translation 4 0.095 8.3
-  rotation -0.5773509358554485 -0.5773509358554485 -0.5773489358556708 2.09441
-  name "Tiago"
-  controller "Tiago"
-  controllerArgs "banana"
-  lidarSlot [
-    Emitter {
-      name "wifi_emitter"
-      channel 2
-    }
-    Receiver {
-      name "wifi_receiver"
-      channel 1
-    }
-    Receiver {
-      name "bluetooth"
-    }
-  ]
-}
-Robot {
-  children [
-    Emitter {
-      name "B0"
-    }
-    Emitter {
-      translation 0 0 4
-      name "B1"
-    }
-    Emitter {
-      translation 0 0 10
-      name "B2"
-    }
-     Emitter {
-      translation 0 0 12.5
-      name "B3"
-    }
-    Emitter {
-      translation 3.5 0 12.5
-      name "B4"
-    }
-    Emitter {
-      translation 6 0 0
-      name "B5"
-    }
-    Emitter {
-      translation 6 0 4
-      name "B6"
-    }
-    Emitter {
-      translation 6 0 10
-      name "B7"
-    }
-    Emitter {
-      translation 8.5 0 0
-      name "B8"
-    }
-    Emitter {
-      translation 8.5 0 3
-      name "B9"
-    }
-    Emitter {
-      translation 8.5 0 5.5
-      name "B10"
-    }
-    Emitter {
-      translation 8.5 0 10
-      name "B11"
-    }
-    Emitter {
-      translation 13 0 0
-      name "B12"
-    }
-    Emitter {
-      translation 13 0 3
-      name "B13"
-    }
-    Emitter {
-      translation 13 0 5.5
-      name "B14"
-    }
-    Emitter {
-      translation 13 0 10
-      name "B15"
-    }
-  ]
-  name "IPS"
-  controller "IPS"
-}
-Robot {
-  children [
-    Receiver {
-      name "wifi_receiver"
-      channel 2
-    }
-    Emitter {
-      name "wifi_emitter"
-      channel 1
-    }
-  ]
-  name "DOS"
-  controller "DOS"
-  supervisor TRUE
-}
+
 MyCabinet {
   translation 12.96 9.59233e-14 9.1535
   rotation 0 1 0 4.712389693899574
