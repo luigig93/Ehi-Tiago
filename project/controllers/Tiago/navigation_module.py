@@ -1,18 +1,23 @@
 # navigation module
 
-from networkx.readwrite.graphml import read_graphml
-from networkx.algorithms.shortest_paths.generic import shortest_path
 import math
 import random
 import basic_module
 import config_tiago
 import communication_module
+from networkx.readwrite.graphml import read_graphml
+from networkx.algorithms.shortest_paths.generic import shortest_path
 
 
 def init_navigation_system(robot):
     init_inertial(robot)
     map_graph = init_map()
     return map_graph
+    
+
+def init_map():
+    graph = read_graphml(path='map.graphml')
+    return graph
 
 
 def init_inertial(robot):
@@ -36,11 +41,6 @@ def read_inertial(robot):
     return yaw
 
 
-# pare funzionare decentemente!
-# non importa l'ordine, basta essere coerenti con i valori di posizione e distanza
-# attenzione alle coordinate e al sistema di riferimetno!
-# posizionare il robot in posizione (0,0) e a partire da quella posizione posizionare tutti i bGM facendo riferimento
-# a quella posizione
 def track_pos(dist_list):
     def get_key(item):
         return item[1]
@@ -112,7 +112,7 @@ def calc_heading(from_point, to_point):
 def calc_route(graph, source, target):
     target_list = list()
     # scartiamo il primo nodo, perchè ci troviamo già su quello (sistema di posizionamento non troppo preciso)
-    path = shortest_path(graph,source,target,weight='distance') #[1:]
+    path = shortest_path(graph,source,target,weight='distance')
 
     for node in path:
         target = dict()
@@ -131,27 +131,10 @@ def calc_route(graph, source, target):
     return target_list
 
 
-def init_map():
-    graph = read_graphml(path='map.graphml')
-    return graph
-
-
 def calc_distance(c_pos, t_pos):
     z = (c_pos[0] - t_pos[0])**2
     x = (c_pos[1] - t_pos[1])**2
     return round(math.sqrt(z + x),2)
-
-
-def init_gps(robot):
-    # get gps sensor
-    gps_sensor = robot.getGPS(config_tiago.GPS_SENSOR)
-    gps_sensor.enable(int(robot.getBasicTimeStep()))
-
-
-def read_gps(robot):
-    gps_sensor = robot.getGPS(config_tiago.GPS_SENSOR)
-    gps_pos = gps_sensor.getValues()
-    return round(gps_pos[2],2), round(gps_pos[0],2)
 
 
 def calc_stop_condition(position_tuple, target_type):
@@ -164,54 +147,21 @@ def calc_stop_condition(position_tuple, target_type):
     return condition
 
 
-def calc_stop_condition1(position_tuple, distance_error):
-     current_position, target_position = position_tuple
-     current_distance = calc_distance(current_position, target_position)
-     # print("current distance: {}".format(current_distance))
-     condition = current_distance <= distance_error
-     return condition
-
-
-def calc_stop_condition2(target_reached, position_tuple, coordinate_error):
-    current_pos_z, current_pos_x = position_tuple[0]
-    target_pos_z, target_pos_x = position_tuple[1]
-    target_z_reached, target_x_reached = target_reached
-
-    if not target_z_reached:
-        #print("target z not reached...")
-        if (target_pos_z - coordinate_error) <= current_pos_z <= (target_pos_z + coordinate_error):
-            #print("target z reached")
-            target_z_reached = True
-
-    if not target_x_reached:
-       # print("target x not reached...")
-        if (target_pos_x - coordinate_error) <= current_pos_x <= (target_pos_x + coordinate_error):
-         #   print("target x reached...")
-            target_x_reached = True
-
-    condition = target_z_reached and target_x_reached
-
-    return  condition, (target_z_reached, target_x_reached)
-
-
 def navigate(robot, navigation_mode, position_tuple):
     current_position, target_position = position_tuple
 
     if navigation_mode == "forward":
-        # print("forward...")
         # check distance from target
         # braking system
         distance_to_target = calc_distance(current_position, target_position)
         basic_module.linear_braking_system(robot, distance_to_target)
 
     elif navigation_mode == "turn":
-        # print("turn...")
         # turn (this is a complete turn)
         basic_module.turn(robot, start_position=current_position, target_position=target_position)
         navigation_mode = "adjust"
 
     elif navigation_mode == "adjust":
-        # print("adjust...")
         # bisogna intervenire qui
         basic_module.turn(robot, start_position=current_position, target_position=target_position)
         navigation_mode = "forward"
@@ -222,3 +172,4 @@ def navigate(robot, navigation_mode, position_tuple):
 
 def look_at_landmark(robot, current_position, landmark_viewpoint):
     basic_module.turn(robot, start_position=current_position, target_position=landmark_viewpoint)
+

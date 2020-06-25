@@ -1,4 +1,3 @@
-from controller import Robot
 import config_tiago
 import communication_module
 import navigation_module
@@ -6,6 +5,7 @@ import basic_module
 import human_computer_interaction_module
 import search_module
 import sys
+from controller import Robot
 
 
 def setup():
@@ -26,7 +26,6 @@ def setup():
 
 def loop(robot, map_graph):
     # init stuff here (only once)
-    # set this only the first time!
     start_landmark = "L6"
     current_node_id = start_landmark  # La simulazione inizia sempre con Tiago posizionato su un landmark, prevediamo solo navigazioni da landmark a landmark
     path_list, object_to_search = human_computer_interaction_module.ask_for_route(map_graph,current_node_id)
@@ -45,15 +44,10 @@ def loop(robot, map_graph):
         if len(dist_list) > 0:
             # calc current position
             current_position = navigation_module.track_pos(dist_list)
-            # print("current_position: {}".format(current_position))
-            # print("target_position: {}".format(target_list[target_index]['position']))
 
             # check stop conditions
             position_tuple = (current_position, target_list[target_index]['position'])
             stop_condition = navigation_module.calc_stop_condition(position_tuple, target_list[target_index]['type'])
-            #stop_condition1 = navigation_module.calc_stop_condition1(position_tuple, config.DIST_ERROR)
-            # stop_condition2, target_list[target_index]['reached'] = navigation_module.calc_stop_condition2(
-            #    target_list[target_index]['reached'], position_tuple, config.COORDINATE_ERROR)
 
             if stop_condition or (current_node_id == target_list[target_index]["name"]):
                 # target reached
@@ -63,21 +57,9 @@ def loop(robot, map_graph):
                 print("target {} @{} reached...".format(target_list[target_index]['name'], target_list[target_index]['position']))
                 current_node_id = target_list[target_index]["name"]
 
-                # trovato il bug!
-                # quando il target index == 0, e l'ultimo nodo del path è una porta, abbiamo un problema
-                # perchè otteniamo un index uguale a -1, e quindi accediamo all'ultimo nodo
-                # se è una porta ci entriamo e richiediamo la chiusura, ma il DOS è in attesa di una richiesta di apertura
-                # quindi viene aperta l'ultima porta e si disallinea tutto il protocollo.
-                # altro problema: non possiamo fermarci in una porta, imponiamo questa regola
-                # altrimenti dobbiamo monitorare lo stato di tutte le porte
-                # ma per questioni di sicurezza meglio imporre che una porta si può solo attraversare
-                # e il robot non può sostarvi!
                 # door opening system
                 if (target_index > 0) and (target_list[target_index-1]['type'] == 'door'):
                     # se il target precedente era una porta, dobbiamo chiuderla!
-                    # dobbiamo chiudere anche l'eventuale porta aperta e non chiusa in un path precedente
-                    # questo gestisce il caso particolare (e che evitermo a prescindere) di un path che termina
-                    # in una porta
                     communication_module.send_request(robot, target_list[target_index-1]['name'], "close")
 
                 # only for landmark
@@ -102,11 +84,7 @@ def loop(robot, map_graph):
                         # abbiamo esplorato tutti gli oggetti
                         print("I think {} is not in this home... Goodbye!")
                         exit(0)
-                        # path_list, object_to_search = human_computer_interaction_module.ask_for_route(map_graph, current_node_id)
-                        # path_index = 0
-                        # object_found = False
                         
-
                     target_list = path_list[path_index]
                     target_index = 0
                 else:

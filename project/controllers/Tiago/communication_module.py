@@ -11,23 +11,23 @@ def init_communication_system(robot):
 
 def init_receiver(robot):
     # bluetooth
-    bluetooth_receiver = robot.getReceiver(config_tiago.RECEIVER)
+    bluetooth_receiver = robot.getReceiver(config_tiago.BLUETOOTH_RECEIVER)
     bluetooth_receiver.enable(int(robot.getBasicTimeStep()))
 
     # wifi
-    wifi_receiver = robot.getReceiver("wifi_receiver")
+    wifi_receiver = robot.getReceiver(config_tiago.WIFI_RECEIVER)
     wifi_receiver.enable(int(robot.getBasicTimeStep()))
 
 
 def clean_msg_queue(robot):
-    recv = robot.getReceiver(config_tiago.RECEIVER)
-    while (recv.getQueueLength() > config_tiago.NUM_OF_BEACONS):
-        recv.nextPacket()  # scarta il messaggio
+    bluetooth_receiver = robot.getReceiver(config_tiago.BLUETOOTH_RECEIVER)
+    while (bluetooth_receiver.getQueueLength() > config_tiago.NUM_OF_BEACONS):
+        bluetooth_receiver.nextPacket()  # scarta il messaggio
 
 
 def receive_msgs(robot):
     dist_list = list()
-    recv = robot.getReceiver(config_tiago.RECEIVER)
+    recv = robot.getReceiver(config_tiago.BLUETOOTH_RECEIVER)
     # devo prendere gli ultimi NUM_OF_BEACONS elementi della coda!
     # serve un ciclo di svuotamento dei messaggi meno recenti
     clean_msg_queue(robot)
@@ -42,22 +42,20 @@ def receive_msgs(robot):
 
 
 def send_request(robot, door, mode):
-    wifi = robot.getEmitter("wifi_emitter")
+    wifi = robot.getEmitter(config_tiago.WIFI_EMITTER)
     msg = "{}/{}".format(door,mode).encode()
     wifi.send(msg)
     basic_module.step(robot)
 
 
 def receive_notify(robot):
-    # print("notifyyyyyyyyyyyyyyyy")
-    wifi_receiver = robot.getReceiver("wifi_receiver")
+    wifi_receiver = robot.getReceiver(config_tiago.WIFI_RECEIVER)
 
     while robot.step(16) != -1:
-        # print("waiting...")
         # ci sarà sempre un solo messaggio alla volta
         if wifi_receiver.getQueueLength() == 1:
-            # print("ok received!")
             msg = wifi_receiver.getData().decode()
             wifi_receiver.nextPacket()
             if msg == "OK":
                 return
+

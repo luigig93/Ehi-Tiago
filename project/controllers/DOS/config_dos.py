@@ -1,6 +1,10 @@
 # door opening system
+WIFI_RECEIVER = "wifi_receiver"
+WIFI_EMITTER = "wifi_emitter"
 NUM_OF_DOORS = 7
-DOOR_OPENING_FIELD = "position"
+OPENING_STEP = 0.006
+CLOSED_POSITION = 0.001
+TIME_STEP = 16
 DOOR_OPENING_SIDE = {
         "D0": 3,
         "D1": -3,

@@ -1,22 +1,18 @@
 # object search module
 
-import pandas as pd
-import numpy as np
 import os
-import pymc3 as pm
-import networkx as nx
 import json
-# import speech_recognition as sr
-# import gensim
 import config_tiago
 import logging
+import pandas as pd
+import numpy as np
+import pymc3 as pm
+import networkx as nx
+
+# disable pymc3 log messages
 logger = logging.getLogger('pymc3')
 logger.setLevel(logging.ERROR)
 
-"""
-with open("./credentials_speech_to_text_google.json") as f:
-    GOOGLE_CLOUD_SPEECH_CREDENTIALS = json.dumps(json.load(f))
-"""
 
 def display_probs(d):
     for key, value in d.items():
@@ -69,26 +65,17 @@ def search_object(table_path, graph, current_position_id, object_to_search):
     df = pd.read_csv(table_path, index_col = 0)
     row = df.loc[df["object"] == object_to_search].drop('object', 1)
 
-    #for x in list(zip(row.keys() ,row.values[0])):
-        # print(str(x[0]) + " " + str(x[1]))
-
     places = row.keys()
     knowledge = row.values[0]
     number_of_places = len(knowledge)
 
-    # node_id = ("pose",7.3533,2.2700,"corridor-2")
     distances_dict = get_distances(graph, current_position_id)
     distances = [ distances_dict[key] for key in places]
 
     ####################################################################################################################
 
     max_distance = max(distances)
-
-    # print("Sommatoria = " + str(sum(distances)) + " numero osservazioni = " + str(sum(knowledge)) + "Rapporto S/o =" + str(sum(distances)/sum(knowledge)))
-
-    # inverted_distances = list(map(lambda x: abs(x-max_distance+1)/3, distances))
     inverted_distances = list(map(lambda x: abs(x-max_distance+3)/3, distances))
-
     prior_knowledge = np.array(inverted_distances)
 	
     with pm.Model() as model:
@@ -113,14 +100,9 @@ def search_object(table_path, graph, current_position_id, object_to_search):
     
     display_probs(dict(zip(places, pvals)))
 
-    #(bedroom-bed, xxx)
     visiting_sequence = sorted(zip(places, pvals),key=lambda x: x[1], reverse=True)
     visiting_sequence = [config_tiago.TAG_TO_ID[tag] for tag,_ in visiting_sequence]
     # tieni solo i migliori 5, e scarta tutti gli zeri
     # valutazione: top1, top3, top5
     return visiting_sequence
-
-
-
-
 

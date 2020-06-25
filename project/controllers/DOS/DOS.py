@@ -4,54 +4,49 @@ import config_dos
 
 
 def open_door(supervisor, door, side):
-    # print("opening door...")
-
     current_position = 0.000
     opened_position = side
-    opening_step = 0.006
+    opening_step = config_dos.OPENING_STEP
 
     if side > 0:
         while round(current_position,3) < opened_position:
             current_position = current_position + opening_step
             set_door_position(door, current_position)
-            supervisor.step(16)
+            supervisor.step(config_dos.TIME_STEP)
     else:
         while round(current_position,3) > opened_position:
             current_position = current_position - opening_step
             set_door_position(door, current_position)
-            supervisor.step(16)
+            supervisor.step(config_dos.TIME_STEP)
 
     set_door_position(door, opened_position)
 
 
 def close_door(supervisor, door, side):
-    # print("closing door...")
-
     current_position = round(read_door_position(door),3)
-    closed_position = 0.001
-    closing_step = 0.006
+    closed_position = config_dos.CLOSED_POSITION
+    closing_step = config_dos.OPENING_STEP
 
     if side > 0:
         while round(current_position, 3) >= closed_position:
             current_position = current_position - closing_step
             set_door_position(door, current_position)
-            supervisor.step(16)
+            supervisor.step(config_dos.TIME_STEP)
     else:
         while round(current_position, 3) <= -closed_position:
             current_position = current_position + closing_step
             set_door_position(door, current_position)
-            supervisor.step(16)
+            supervisor.step(config_dos.TIME_STEP)
 
     # ritoccare chiusura
     set_door_position(door, 0)
-    supervisor.step(16)
+    supervisor.step(config_dos.TIME_STEP)
 
 
 def get_doors_id(supervisor):
     root = supervisor.getRoot()
     children = root.getField("children")
     num_of_children = children.getCount()
-    # print("This world contains {} nodes".format(num_of_children))
 
     doors_id_list = list()
     for index in range(num_of_children):
@@ -100,27 +95,23 @@ def init_doors(supervisor, doors_id):
             set_door_position(door_node, float(0))
 
         doors[name]["status"] = "close"
-        #debug
-        # print("id: {}, name: {}, open: {}, canBeOpen: {}".format(
-        #    id, name, read_door_position(door_node), read_canBeOpen(door_node)))
 
     return doors
 
 
 def init_wifi(robot):
-    receiver = robot.getReceiver("wifi_receiver")
+    receiver = robot.getReceiver(config_dos.WIFI_RECEIVER)
     receiver.enable(int(robot.getBasicTimeStep()))
 
 
 def receive_request(robot, doors):
-    wifi_receiver = robot.getReceiver("wifi_receiver")
+    wifi_receiver = robot.getReceiver(config_dos.WIFI_RECEIVER)
 
-    while robot.step(16) != -1:
+    while robot.step(config_dos.TIME_STEP) != -1:
         # ci sarà sempre un solo messaggio alla volta
         if wifi_receiver.getQueueLength() > 0:
             msg = wifi_receiver.getData().decode()
             wifi_receiver.nextPacket()
-            # print("msg received: {}".format(msg))
             # in msg è contenuto il nome della porta e l'action: aprire o chiudere
             name, mode = msg.split("/")
 
@@ -132,15 +123,15 @@ def receive_request(robot, doors):
                 close_door(robot, doors[name]["node"], doors[name]["side"])
                 doors[name]["status"] = "close"
 
-            # se è giò aperta resta aperta, se è già chiusa resta chiusa
+            # se è già aperta resta aperta, se è già chiusa resta chiusa
             return mode
 
 
 def notify_opening(robot):
-    wifi = robot.getEmitter("wifi_emitter")
+    wifi = robot.getEmitter(config_dos.WIFI_EMITTER)
     msg = "OK".encode()
     wifi.send(msg)
-    robot.step(16)
+    robot.step(config_dos.TIME_STEP)
 
 
 def setup():
@@ -156,7 +147,7 @@ def loop(supervisor_tuple):
     supervisor, doors = supervisor_tuple
 
     # robot loop
-    while supervisor.step(16) != -1:
+    while supervisor.step(config_dos.TIME_STEP) != -1:
         # resta in ascolto di una richiesta di apertura o chiusura porta da parte del robot
         mode = receive_request(supervisor, doors)
         if mode == "open":
@@ -168,3 +159,5 @@ def loop(supervisor_tuple):
 if __name__ == "__main__":
     supervisor_tuple = setup()
     loop(supervisor_tuple)
+
+

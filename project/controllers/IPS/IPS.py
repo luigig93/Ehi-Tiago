@@ -1,7 +1,7 @@
 #Indoor Positioning System
 
-from controller import Robot
 import config_ips
+from controller import Robot
 
 
 def gen_beacons():
