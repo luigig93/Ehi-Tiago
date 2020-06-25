@@ -1,7 +1,7 @@
 # communication module 
 
 import math
-import config
+import config_tiago
 import basic_module
 
 
@@ -11,7 +11,7 @@ def init_communication_system(robot):
 
 def init_receiver(robot):
     # bluetooth
-    bluetooth_receiver = robot.getReceiver(config.RECEIVER)
+    bluetooth_receiver = robot.getReceiver(config_tiago.RECEIVER)
     bluetooth_receiver.enable(int(robot.getBasicTimeStep()))
 
     # wifi
@@ -20,14 +20,14 @@ def init_receiver(robot):
 
 
 def clean_msg_queue(robot):
-    recv = robot.getReceiver(config.RECEIVER)
-    while (recv.getQueueLength() > config.NUM_OF_BEACONS):
+    recv = robot.getReceiver(config_tiago.RECEIVER)
+    while (recv.getQueueLength() > config_tiago.NUM_OF_BEACONS):
         recv.nextPacket()  # scarta il messaggio
 
 
 def receive_msgs(robot):
     dist_list = list()
-    recv = robot.getReceiver(config.RECEIVER)
+    recv = robot.getReceiver(config_tiago.RECEIVER)
     # devo prendere gli ultimi NUM_OF_BEACONS elementi della coda!
     # serve un ciclo di svuotamento dei messaggi meno recenti
     clean_msg_queue(robot)
@@ -49,14 +49,14 @@ def send_request(robot, door, mode):
 
 
 def receive_notify(robot):
-    print("notifyyyyyyyyyyyyyyyy")
+    # print("notifyyyyyyyyyyyyyyyy")
     wifi_receiver = robot.getReceiver("wifi_receiver")
 
     while robot.step(16) != -1:
-        print("waiting...")
+        # print("waiting...")
         # ci sarà sempre un solo messaggio alla volta
         if wifi_receiver.getQueueLength() == 1:
-            print("ok received!")
+            # print("ok received!")
             msg = wifi_receiver.getData().decode()
             wifi_receiver.nextPacket()
             if msg == "OK":

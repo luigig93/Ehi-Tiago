@@ -6,14 +6,17 @@ import os
 import pymc3 as pm
 import networkx as nx
 import json
-import speech_recognition as sr
-import gensim
-import config
+# import speech_recognition as sr
+# import gensim
+import config_tiago
+import logging
+logger = logging.getLogger('pymc3')
+logger.setLevel(logging.ERROR)
 
-
+"""
 with open("./credentials_speech_to_text_google.json") as f:
     GOOGLE_CLOUD_SPEECH_CREDENTIALS = json.dumps(json.load(f))
-
+"""
 
 def display_probs(d):
     for key, value in d.items():
@@ -33,7 +36,7 @@ def get_distances(graph, source_id):
 
     for key in distances.keys():
         if key[0] == "L":
-            position = config.ID_TO_TAG[key]
+            position = config_tiago.ID_TO_TAG[key]
             distances_filtered[position] = distances[key]
 
     return distances_filtered
@@ -52,7 +55,7 @@ def check_similar_objects(df, gmodel, object_to_search):
     similars = [x for x,_ in similars]
 
     for similar in similars:
-        print(similar)
+        # print(similar)
         if(len(df.loc[df["object"] == similar]) > max):
             object_most_similar = similar
             max = sum(df.loc[df["object"] == similar].drop("object",1).values[0])
@@ -66,8 +69,8 @@ def search_object(table_path, graph, current_position_id, object_to_search):
     df = pd.read_csv(table_path, index_col = 0)
     row = df.loc[df["object"] == object_to_search].drop('object', 1)
 
-    for x in list(zip(row.keys() ,row.values[0])):
-        print(str(x[0]) + " " + str(x[1]))
+    #for x in list(zip(row.keys() ,row.values[0])):
+        # print(str(x[0]) + " " + str(x[1]))
 
     places = row.keys()
     knowledge = row.values[0]
@@ -81,13 +84,13 @@ def search_object(table_path, graph, current_position_id, object_to_search):
 
     max_distance = max(distances)
 
-    print("Sommatoria = " + str(sum(distances)) + " numero osservazioni = " + str(sum(knowledge)) + "Rapporto S/o =" + str(sum(distances)/sum(knowledge)))
+    # print("Sommatoria = " + str(sum(distances)) + " numero osservazioni = " + str(sum(knowledge)) + "Rapporto S/o =" + str(sum(distances)/sum(knowledge)))
 
     # inverted_distances = list(map(lambda x: abs(x-max_distance+1)/3, distances))
     inverted_distances = list(map(lambda x: abs(x-max_distance+3)/3, distances))
 
     prior_knowledge = np.array(inverted_distances)
-
+	
     with pm.Model() as model:
         # Parameters of the Multinomial are from a Dirichlet
         parameters = pm.Dirichlet('parameters', a=prior_knowledge, shape=number_of_places)
@@ -106,11 +109,13 @@ def search_object(table_path, graph, current_position_id, object_to_search):
     pvals = trace_df.iloc[:, :number_of_places].mean(axis = 0)
 
     ###################################################################################################################
+    print("I think {} could be there:".format(object_to_search))
+    
     display_probs(dict(zip(places, pvals)))
 
     #(bedroom-bed, xxx)
     visiting_sequence = sorted(zip(places, pvals),key=lambda x: x[1], reverse=True)
-    visiting_sequence = [config.TAG_TO_ID[tag] for tag,_ in visiting_sequence]
+    visiting_sequence = [config_tiago.TAG_TO_ID[tag] for tag,_ in visiting_sequence]
     # tieni solo i migliori 5, e scarta tutti gli zeri
     # valutazione: top1, top3, top5
     return visiting_sequence

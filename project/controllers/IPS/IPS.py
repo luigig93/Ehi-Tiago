@@ -1,24 +1,24 @@
 #Indoor Positioning System
 
 from controller import Robot
-import config
+import config_ips
 
 
 def gen_beacons():
-    return ["B" + str(index) for index in range(config.NUM_OF_BEACONS)]
+    return ["B" + str(index) for index in range(config_ips.NUM_OF_BEACONS)]
 
 
 def set_beacons(robot, beacons):
     emitters_list = list()
-    for index in range(config.NUM_OF_BEACONS):
+    for index in range(config_ips.NUM_OF_BEACONS):
         emitters_list.append(robot.getEmitter(beacons[index]))
-        print("Bella, Antenna#" + str(index) + "!")
+        # print("Bella, Antenna#" + str(index) + "!")
 
     return emitters_list
 
 
 def send_msgs(emitters_list, msg_list):
-    for index in range(config.NUM_OF_BEACONS):
+    for index in range(config_ips.NUM_OF_BEACONS):
         emitters_list[index].send(msg_list[index])
 
 
@@ -31,8 +31,8 @@ def setup():
 
 def loop(robot_tuple):
     robot, emitters_list = robot_tuple
-    msg_list = [("B" + str(index)).encode() for index in range(config.NUM_OF_BEACONS)]
-    send_ratio = config.ADVERT_INTERVAL // int(robot.getBasicTimeStep())
+    msg_list = [("B" + str(index)).encode() for index in range(config_ips.NUM_OF_BEACONS)]
+    send_ratio = config_ips.ADVERT_INTERVAL // int(robot.getBasicTimeStep())
     current_interval = 0
 
     # robot loop
@@ -47,9 +47,4 @@ def loop(robot_tuple):
 if __name__ == "__main__":
     robot_tuple = setup()
     loop(robot_tuple)
-
-
-
-
-
 

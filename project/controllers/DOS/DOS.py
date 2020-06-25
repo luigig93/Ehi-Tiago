@@ -1,10 +1,10 @@
 # door opening system
 from controller import Supervisor
-import config
+import config_dos
 
 
 def open_door(supervisor, door, side):
-    print("opening door...")
+    # print("opening door...")
 
     current_position = 0.000
     opened_position = side
@@ -25,7 +25,7 @@ def open_door(supervisor, door, side):
 
 
 def close_door(supervisor, door, side):
-    print("closing door...")
+    # print("closing door...")
 
     current_position = round(read_door_position(door),3)
     closed_position = 0.001
@@ -51,7 +51,7 @@ def get_doors_id(supervisor):
     root = supervisor.getRoot()
     children = root.getField("children")
     num_of_children = children.getCount()
-    print("This world contains {} nodes".format(num_of_children))
+    # print("This world contains {} nodes".format(num_of_children))
 
     doors_id_list = list()
     for index in range(num_of_children):
@@ -94,15 +94,15 @@ def init_doors(supervisor, doors_id):
         name = read_door_name(door_node)
         doors[name] = dict()
         doors[name]["node"] = door_node
-        doors[name]["side"] = config.DOOR_OPENING_SIDE[name]
+        doors[name]["side"] = config_dos.DOOR_OPENING_SIDE[name]
 
         if read_door_position(door_node) != float(0):
             set_door_position(door_node, float(0))
 
         doors[name]["status"] = "close"
         #debug
-        print("id: {}, name: {}, open: {}, canBeOpen: {}".format(
-            id, name, read_door_position(door_node), read_canBeOpen(door_node)))
+        # print("id: {}, name: {}, open: {}, canBeOpen: {}".format(
+        #    id, name, read_door_position(door_node), read_canBeOpen(door_node)))
 
     return doors
 
@@ -120,7 +120,7 @@ def receive_request(robot, doors):
         if wifi_receiver.getQueueLength() > 0:
             msg = wifi_receiver.getData().decode()
             wifi_receiver.nextPacket()
-            print("msg received: {}".format(msg))
+            # print("msg received: {}".format(msg))
             # in msg è contenuto il nome della porta e l'action: aprire o chiudere
             name, mode = msg.split("/")
 

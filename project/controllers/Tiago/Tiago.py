@@ -1,16 +1,16 @@
 from controller import Robot
-import config
+import config_tiago
 import communication_module
 import navigation_module
 import basic_module
 import human_computer_interaction_module
 import search_module
+import sys
 
 
 def setup():
     # create robot
-    robot = Robot()
-    print("Bella, Tiago!")
+    robot = Robot()  
 
     # init basic system
     basic_module.init_basic_system(robot)
@@ -27,13 +27,16 @@ def setup():
 def loop(robot, map_graph):
     # init stuff here (only once)
     # set this only the first time!
-    current_node_id = "L6"  # magari chiedilo all'utente! input("dove si trova Tiago?")
+    start_landmark = "L6"
+    current_node_id = start_landmark  # La simulazione inizia sempre con Tiago posizionato su un landmark, prevediamo solo navigazioni da landmark a landmark
     path_list, object_to_search = human_computer_interaction_module.ask_for_route(map_graph,current_node_id)
     target_list = path_list[0]
     path_index = 0
     target_index = 0
     navigation_mode = "turn"
-    object_found = False
+    # object_found = False
+    
+    print("Let's start!")
 
     # robot loop
     while robot.step(16) != -1:
@@ -42,8 +45,8 @@ def loop(robot, map_graph):
         if len(dist_list) > 0:
             # calc current position
             current_position = navigation_module.track_pos(dist_list)
-            print("current_position: {}".format(current_position))
-            print("target_position: {}".format(target_list[target_index]['position']))
+            # print("current_position: {}".format(current_position))
+            # print("target_position: {}".format(target_list[target_index]['position']))
 
             # check stop conditions
             position_tuple = (current_position, target_list[target_index]['position'])
@@ -78,12 +81,15 @@ def loop(robot, map_graph):
                     communication_module.send_request(robot, target_list[target_index-1]['name'], "close")
 
                 # only for landmark
-                if target_list[target_index]['type'] == 'landmark':
+                if target_list[target_index]['type'] == 'landmark' and (current_node_id != start_landmark):
                     navigation_module.look_at_landmark(robot, current_position, target_list[target_index]['viewpoint'])
                     # controlla se l'oggetto da cercare è presente nel landmark
                     object_found = basic_module.look_for_object(target_list[target_index]["name"], object_to_search)
-
-
+                    # se abbiamo trovato l'oggetto, possiamo terminare la simulazione. 
+                    if object_found:
+                    	print("Goodbye!")
+                    	exit(0)
+                    	
                 # change target
                 target_index += 1
                 navigation_mode = "turn"
@@ -92,12 +98,14 @@ def loop(robot, map_graph):
                     # change path
                     path_index += 1
 
-                    if (path_index  == len(path_list)) or object_found:
-                        # abbiamo esplorato tutti gli oggetti, oppure abbiamo trovato l'oggetto
-                        # chiedere all'utente di cercare un nuovo oggetto
-                        path_list, object_to_search = human_computer_interaction_module.ask_for_route(map_graph, current_node_id)
-                        path_index = 0
-                        object_found = False
+                    if (path_index  == len(path_list)):
+                        # abbiamo esplorato tutti gli oggetti
+                        print("I think {} is not in this home... Goodbye!")
+                        exit(0)
+                        # path_list, object_to_search = human_computer_interaction_module.ask_for_route(map_graph, current_node_id)
+                        # path_index = 0
+                        # object_found = False
+                        
 
                     target_list = path_list[path_index]
                     target_index = 0

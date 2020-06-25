@@ -5,7 +5,7 @@ from networkx.algorithms.shortest_paths.generic import shortest_path
 import math
 import random
 import basic_module
-import config
+import config_tiago
 import communication_module
 
 
@@ -16,12 +16,12 @@ def init_navigation_system(robot):
 
 
 def init_inertial(robot):
-    inertial = robot.getInertialUnit(config.INERTIAL_UNIT)
+    inertial = robot.getInertialUnit(config_tiago.INERTIAL_UNIT)
     inertial.enable(int(robot.getBasicTimeStep()))
 
 
 def read_inertial(robot):
-    inertial = robot.getInertialUnit(config.INERTIAL_UNIT)
+    inertial = robot.getInertialUnit(config_tiago.INERTIAL_UNIT)
     yaw = int(math.degrees(inertial.getRollPitchYaw()[2]))
     if yaw < 0:
         yaw = yaw + 360
@@ -50,9 +50,9 @@ def track_pos(dist_list):
     nearest_beacon = sorted_beacon[:3]
 
     # dist list = [...,("B#", dist),...]
-    x1, y1 = config.BEACONS_POS_DICT[nearest_beacon[0][0]]
-    x2, y2 = config.BEACONS_POS_DICT[nearest_beacon[1][0]]
-    x3, y3 = config.BEACONS_POS_DICT[nearest_beacon[2][0]]
+    x1, y1 = config_tiago.BEACONS_POS_DICT[nearest_beacon[0][0]]
+    x2, y2 = config_tiago.BEACONS_POS_DICT[nearest_beacon[1][0]]
+    x3, y3 = config_tiago.BEACONS_POS_DICT[nearest_beacon[2][0]]
 
     r1 = nearest_beacon[0][1]
     r2 = nearest_beacon[1][1]
@@ -144,18 +144,18 @@ def calc_distance(c_pos, t_pos):
 
 def init_gps(robot):
     # get gps sensor
-    gps_sensor = robot.getGPS(config.GPS_SENSOR)
+    gps_sensor = robot.getGPS(config_tiago.GPS_SENSOR)
     gps_sensor.enable(int(robot.getBasicTimeStep()))
 
 
 def read_gps(robot):
-    gps_sensor = robot.getGPS(config.GPS_SENSOR)
+    gps_sensor = robot.getGPS(config_tiago.GPS_SENSOR)
     gps_pos = gps_sensor.getValues()
     return round(gps_pos[2],2), round(gps_pos[0],2)
 
 
 def calc_stop_condition(position_tuple, target_type):
-    error = config.NAV_ERROR
+    error = config_tiago.NAV_ERROR
 
     current_position, target_position = position_tuple
     condition_z = (target_position[0] - error) <= current_position[0] <= (target_position[0] + error)
@@ -167,7 +167,7 @@ def calc_stop_condition(position_tuple, target_type):
 def calc_stop_condition1(position_tuple, distance_error):
      current_position, target_position = position_tuple
      current_distance = calc_distance(current_position, target_position)
-     print("current distance: {}".format(current_distance))
+     # print("current distance: {}".format(current_distance))
      condition = current_distance <= distance_error
      return condition
 
@@ -198,24 +198,24 @@ def navigate(robot, navigation_mode, position_tuple):
     current_position, target_position = position_tuple
 
     if navigation_mode == "forward":
-        print("forward...")
+        # print("forward...")
         # check distance from target
         # braking system
         distance_to_target = calc_distance(current_position, target_position)
         basic_module.linear_braking_system(robot, distance_to_target)
 
     elif navigation_mode == "turn":
-        print("turn...")
+        # print("turn...")
         # turn (this is a complete turn)
         basic_module.turn(robot, start_position=current_position, target_position=target_position)
         navigation_mode = "adjust"
 
     elif navigation_mode == "adjust":
-        print("adjust...")
+        # print("adjust...")
         # bisogna intervenire qui
         basic_module.turn(robot, start_position=current_position, target_position=target_position)
         navigation_mode = "forward"
-        basic_module.go_forward(robot, config.CRUISE_SPEED)
+        basic_module.go_forward(robot, config_tiago.CRUISE_SPEED)
 
     return navigation_mode
 
