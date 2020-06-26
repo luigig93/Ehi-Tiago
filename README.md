@@ -15,7 +15,7 @@ To run this project you need Python3 and all the modules in the requirements.txt
 If you have already installed Python3, just run this command:
 
 ```
-pip3 install requirements.txt
+pip3 install -r requirements.txt
 ```
 
 ### Installing
